@@ -1,5 +1,5 @@
 // Service worker بسيط: يخزّن صفحات الغلاف عشان التطبيق يفتح بسرعة
-const CACHE = 'eyelanguage-v1';
+const CACHE = 'eyelanguage-v2';
 const SHELL = ['./', './index.html', './install.html', './manifest.json',
                './icon-192.png', './icon-512.png'];
 
