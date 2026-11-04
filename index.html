@@ -23,7 +23,7 @@
              width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
              background: rgba(26,115,232,.92); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25);
              display: flex; align-items: center; justify-content: center; padding: 0; }
-  #home { left: 56px; background: rgba(15,118,110,.92); }
+  #home { left: 8px; top: calc(56px + env(safe-area-inset-top)); background: rgba(15,118,110,.92); }
   #refresh:active, #home:active { transform: scale(.92); }
   #refresh svg, #home svg { width: 22px; height: 22px; }
   #refresh.spin svg { animation: spin .8s linear infinite; }
@@ -79,8 +79,11 @@
   // زرار الرئيسية: يرجع للصفحة الرئيسية للنظام
   document.getElementById('home').addEventListener('click', () => {
     loader.classList.remove('hide');
+    let token = '';
+    try { token = new URL(frame.src).searchParams.get('token') || ''; } catch (err) {}
+    const home = token ? APP_URL + '?token=' + encodeURIComponent(token) : APP_URL;
     frame.src = 'about:blank';
-    setTimeout(() => { frame.src = APP_URL; }, 50);
+    setTimeout(() => { frame.src = home; }, 50);
   });
 
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
