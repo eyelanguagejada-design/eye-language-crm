@@ -24,8 +24,12 @@
              background: rgba(26,115,232,.92); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25);
              display: flex; align-items: center; justify-content: center; padding: 0; }
   #home { left: 8px; top: calc(56px + env(safe-area-inset-top)); background: rgba(15,118,110,.92); }
-  #refresh:active, #home:active { transform: scale(.92); }
-  #refresh svg, #home svg { width: 22px; height: 22px; }
+  #cars { position: fixed; z-index: 10; left: 8px; top: calc(104px + env(safe-area-inset-top));
+          width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+          background: rgba(234,88,12,.92); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+          display: flex; align-items: center; justify-content: center; padding: 0; }
+  #refresh:active, #home:active, #cars:active { transform: scale(.92); }
+  #refresh svg, #home svg, #cars svg { width: 22px; height: 22px; }
   #refresh.spin svg { animation: spin .8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
@@ -37,6 +41,9 @@
   </button>
   <button id="home" title="الصفحة الرئيسية" aria-label="الصفحة الرئيسية">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+  </button>
+  <button id="cars" title="السيارات" aria-label="السيارات">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5"/></svg>
   </button>
      <iframe id="app" allow="geolocation *; clipboard-write; fullscreen" allowfullscreen></iframe>
 <script>
@@ -84,6 +91,11 @@
     const home = token ? APP_URL + '?token=' + encodeURIComponent(token) : APP_URL;
     frame.src = 'about:blank';
     setTimeout(() => { frame.src = home; }, 50);
+  });
+
+  // زرار السيارات: يفتح نظام السيارات
+  document.getElementById('cars').addEventListener('click', () => {
+    location.href = 'https://eyelanguagejada-design.github.io/eye-language-crm/cars/install.html';
   });
 
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
