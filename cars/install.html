@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="السيارات">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>تثبيت إدارة السيارات</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#111;font-family:Tahoma,Arial,sans-serif;color:#222}
+#guide{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px}
+.brand{color:#fff;font-size:28px;font-weight:800;letter-spacing:4px}
+.sub{color:#bbb;font-size:13px;margin:6px 0 22px}
+.card{background:#fff;border-radius:16px;padding:22px;max-width:420px;width:100%}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.head img{width:48px;height:48px;border-radius:10px}
+.head h1{font-size:20px}.head p{font-size:13px;color:#666}
+h3{font-size:14px;margin:14px 0 6px;color:#444}
+ol{padding-right:20px;line-height:2;font-size:15px}
+.note{font-size:12px;color:#777;margin-top:14px}
+button{display:none;width:100%;margin-top:16px;padding:13px;border:0;border-radius:10px;background:#f5c542;font-size:16px;font-weight:700;cursor:pointer}
+a.web{color:#ddd;margin-top:20px;font-size:14px}
+#app{position:fixed;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}
+</style>
+</head>
+<body>
+<div id="guide">
+  <div class="brand">EYE LANGUAGE</div>
+  <div class="sub">لغة العين</div>
+  <div class="card">
+    <div class="head"><img src="icon-192.png" alt=""><div><h1>إدارة السيارات</h1><p>نظام متابعة وإدارة سيارات الشركة</p></div></div>
+    <h3>أندرويد</h3>
+    <ol>
+      <li>افتح اللينك ده من <b>Google Chrome</b>.</li>
+      <li>اضغط على النقط التلاتة ⋮ فوق.</li>
+      <li>اختار <b>تثبيت التطبيق</b> أو <b>إضافة إلى الشاشة الرئيسية</b>.</li>
+    </ol>
+    <h3>آيفون</h3>
+    <ol>
+      <li>افتح اللينك ده من <b>Safari</b>.</li>
+      <li>اضغط على زر <b>المشاركة</b> ⬆️ تحت.</li>
+      <li>اختار <b>إضافة إلى الشاشة الرئيسية</b>.</li>
+    </ol>
+    <p class="note">بعد التثبيت افتح أيقونة «السيارات» من الشاشة الرئيسية.</p>
+    <button id="installBtn">📲 ثبّت التطبيق دلوقتي</button>
+  </div>
+  <a class="web" href="index.html?web">أو ادخل من المتصفح</a>
+</div>
+<script>
+const APP_URL = "https://script.google.com/macros/s/AKfycbyttmlLjHYANqx_oB_iW0NFlb95icUx8oFS-8ZLa0wLgiQdTxZpjYiNAwd6B19gdgiHsg/exec";
+let deferred;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; document.getElementById('installBtn').style.display = 'block'; });
+document.getElementById('installBtn').onclick = async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; };
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+</script>
+</body>
+</html>
